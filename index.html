@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TODO</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f0f2f5;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 48px 20zpx;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 480px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #1a1a2e;
+      letter-spacing: 0.2em;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    /* 入力欄 */
+    .input-row {
+      display: flex;
+      border-bottom: 1px solid #eee;
+    }
+
+    #new-todo {
+      flex: 1;
+      padding: 16px 20px;
+      font-size: 1rem;
+      border: none;
+      outline: none;
+      color: #333;
+    }
+
+    #new-todo::placeholder { color: #bbb; }
+
+    .add-btn {
+      padding: 0 22px;
+      background: #4f46e5;
+      color: #fff;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .add-btn:hover { background: #4338ca; }
+
+    /* リスト */
+    #todo-list { list-style: none; }
+
+    .todo-item {
+      display: flex;
+      align-items: center;
+      padding: 14px 20px;
+      border-bottom: 1px solid #f3f3f3;
+      gap: 12px;
+      transition: background 0.1s;
+    }
+
+    .todo-item:hover { background: #fafafa; }
+    .todo-item:last-child { border-bottom: none; }
+
+    .todo-item input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: #4f46e5;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .todo-text {
+      flex: 1;
+      font-size: 0.95rem;
+      color: #333;
+      line-height: 1.5;
+      word-break: break-all;
+    }
+
+    .todo-text.done {
+      text-decoration: line-through;
+      color: #bbb;
+    }
+
+    .del-btn {
+      background: none;
+      border: none;
+      color: #ddd;
+      font-size: 1rem;
+      cursor: pointer;
+      padding: 2px 6px;
+      border-radius: 4px;
+      transition: color 0.15s;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+
+    .del-btn:hover { color: #ef4444; }
+
+    /* 空状態 */
+    .empty {
+      padding: 40px;
+      text-align: center;
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+
+    /* フッター */
+    .footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      background: #fafafa;
+      border-top: 1px solid #eee;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .count {
+      font-size: 0.8rem;
+      color: #aaa;
+      min-width: 60px;
+    }
+
+    .filters {
+      display: flex;
+      gap: 4px;
+    }
+
+    .filter-btn {
+      padding: 4px 10px;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      background: none;
+      font-size: 0.8rem;
+      color: #888;
+      cursor: pointer;
+      transition: all 0.12s;
+    }
+
+    .filter-btn:hover { border-color: #4f46e5; color: #4f46e5; }
+
+    .filter-btn.active {
+      border-color: #4f46e5;
+      color: #4f46e5;
+    }
+
+    .clear-btn {
+      background: none;
+      border: none;
+      font-size: 0.8rem;
+      color: #aaa;
+      cursor: pointer;
+      transition: color 0.15s;
+      min-width: 72px;
+      text-align: right;
+    }
+
+    .clear-btn:hover { color: #ef4444; }
+    .clear-btn:disabled { opacity: 0; pointer-events: none; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <h1>TODO</h1>
+    <div class="card">
+      <div class="input-row">
+        <input id="new-todo" type="text" placeholder="タスクを入力して Enter" maxlength="200" autofocus>
+        <button class="add-btn" id="add-btn" title="追加">＋</button>
+      </div>
+      <ul id="todo-list"></ul>
+      <div class="footer">
+        <span class="count" id="count"></span>
+        <div class="filters" id="filters"></div>
+        <button class="clear-btn" id="clear-btn">完了を削除</button>
+      </div>
+    </div>
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>
